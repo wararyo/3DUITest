@@ -10,6 +10,8 @@ public class Knob : MonoBehaviour {
 
     public bool loop = false;
 
+    OVRInput.Controller activeController;
+
     //0 <= value <= 1
     float m_value = 0.5f;
     public float Value
@@ -28,7 +30,7 @@ public class Knob : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        
+        activeController = OVRInput.GetActiveController();
     }
 
     // Update is called once per frame
@@ -36,5 +38,7 @@ public class Knob : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.A)) Value += 0.01f;
         else if (Input.GetKey(KeyCode.S)) Value -= 0.01f;
+
+        Quaternion rot = OVRInput.GetLocalControllerRotation(activeController);
     }
 }
